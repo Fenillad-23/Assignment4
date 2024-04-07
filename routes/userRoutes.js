@@ -1,17 +1,18 @@
+// userRoutes.js
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-router.get("/user", async (req, res) => {
+
+router.get('/', async (req, res) => {
     try {
-        const user = await User.find();
-        res.json(user);
+        const users = await User.find();
+        res.json(users);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// created post api
-router.post("/add/user", async (req, res) => {
+router.post('/add', async (req, res) => {
     const user = new User({
         email: req.body.email,
         password: req.body.password,
@@ -27,7 +28,8 @@ router.post("/add/user", async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
-router.delete("/user/:id", async (req, res) => {
+
+router.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -37,34 +39,28 @@ router.delete("/user/:id", async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.json({ message: "user deleted successfully" });
+        res.json({ message: "User deleted successfully" });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// created update api
-router.put("/user/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
     const id = req.params.id;
-    const updateUser = {
-        email: req.body.email,
-        password: req.body.password,
-        username: req.body.username,
-        purchaseHistory: req.body.purchaseHistory,
-        shippingAddress: req.body.shippingAddress
-    };
 
     try {
-        const updatedUser = await User.findByIdAndUpdate(id, updateUser, {
-            new: true,
+        const updatedUser = await User.findByIdAndUpdate(id, req.body, {
+            new: true
         });
 
         if (!updatedUser) {
-            return res.status(404).json({ message: "user not found" });
+            return res.status(404).json({ message: "User not found" });
         }
 
-        res.json({ message: "user updated successfully", updatedUser });
+        res.json({ message: "User updated successfully", updatedUser });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
+module.exports = router;

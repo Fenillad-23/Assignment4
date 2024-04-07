@@ -1,5 +1,14 @@
 {
+  "name": "Assignment4",
+  "version": "1.0.0",
+  "description": "demo",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "node": "^18.20.1"
+    "express": "^4.19.2",
+    "node": "^18.20.1",
+    "mongoose": "^8.2.4"
   }
 }

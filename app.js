@@ -1,14 +1,11 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 
-const userRoutes = require('./routes/userRoutes');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const PORT = 5001;
 
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-
+// MongoDB connection
 mongoose.connect(
     "mongodb+srv://dbfenil:STjTtRC7Fi1KS6ls@cluster0.fiab4b3.mongodb.net/demo?retryWrites=true&w=majority"
 );
@@ -18,8 +15,13 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", () => {
     console.log("Connected to MongoDB");
 });
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+const userRoutes = require('./routes/userRoutes');
 app.use('/user', userRoutes);
-const PORT =  5000;
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
