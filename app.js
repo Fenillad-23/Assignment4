@@ -21,6 +21,8 @@ app.use(cors());
 app.use(bodyParser.json());
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
+const commentRoutes = require('./routes/commentRoutes');
+app.use('/comment', commentRoutes);
 app.use("/product", productRoutes);
 app.use('/user', userRoutes);
 
