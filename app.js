@@ -20,6 +20,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes');
+app.use("/product", productRoutes);
 app.use('/user', userRoutes);
 
 app.listen(PORT, () => {
