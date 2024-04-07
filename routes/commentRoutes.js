@@ -1,4 +1,4 @@
-// commentRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const Comment = require('../models/comment');
@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// POST a new comment
 router.post('/add', async (req, res) => {
     const comment = new Comment({
         productId: req.body.productId,
@@ -31,7 +30,7 @@ router.post('/add', async (req, res) => {
     }
 });
 
-// DELETE a comment
+
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
@@ -48,7 +47,6 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// PUT/update a comment
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
 

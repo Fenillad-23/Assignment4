@@ -1,9 +1,8 @@
-// orderRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/order');
 
-// GET all orders
 router.get('/', async (req, res) => {
     try {
         const orders = await Order.find();
@@ -13,7 +12,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// POST a new order
+
 router.post('/add', async (req, res) => {
     const order = new Order({
         userId: req.body.userId,
@@ -33,7 +32,6 @@ router.post('/add', async (req, res) => {
     }
 });
 
-// DELETE an order
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
@@ -50,7 +48,7 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// PUT/update an order
+
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
 

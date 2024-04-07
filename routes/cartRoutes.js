@@ -1,9 +1,8 @@
-// cartRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const Cart = require('../models/cart');
 
-// GET all carts
 router.get('/', async (req, res) => {
     try {
         const carts = await Cart.find();
@@ -13,7 +12,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// POST a new cart
+
 router.post('/add', async (req, res) => {
     const cart = new Cart({
         products: req.body.products,
@@ -28,7 +27,7 @@ router.post('/add', async (req, res) => {
     }
 });
 
-// DELETE a cart
+
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
@@ -45,7 +44,6 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// PUT/update a cart
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
 
