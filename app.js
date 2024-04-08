@@ -5,7 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const PORT = 5001;
 
-// MongoDB connection
+
 mongoose.connect(
     "mongodb+srv://dbfenil:STjTtRC7Fi1KS6ls@cluster0.fiab4b3.mongodb.net/demo?retryWrites=true&w=majority"
 );
@@ -24,6 +24,7 @@ const productRoutes = require('./routes/productRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+
 app.use('/order', orderRoutes);
 app.use('/cart', cartRoutes);
 app.use('/comment', commentRoutes);
