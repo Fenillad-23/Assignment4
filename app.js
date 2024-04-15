@@ -19,16 +19,18 @@ db.once("open", () => {
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'));
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const upload = require('./middleware/upload');
 
 app.use('/order', orderRoutes);
 app.use('/cart', cartRoutes);
 app.use('/comment', commentRoutes);
-app.use("/product", productRoutes);
+app.use("/product", upload.single('image'), productRoutes);
 app.use('/user', userRoutes);
 
 app.listen(PORT, () => {
