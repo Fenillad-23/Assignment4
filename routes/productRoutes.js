@@ -14,11 +14,16 @@ router.get('/', async (req, res) => {
 
 router.post('/add', async (req, res) => {
     const product = new Product({
-        description: req.body.description,
-        image: req.body.image,
-        pricing: req.body.pricing,
-        shippingCost: req.body.shippingCost
+        name: req.body.name,
+        category: req.body.category,
+        specifications: req.body.specifications,
+        price: req.body.price,
+        rating: req.body.rating,
     });
+
+    if(req.file) {
+        product.image = `http://localhost:5001/${req.file.path}`;
+    }
 
     try {
         const newProduct = await product.save();
