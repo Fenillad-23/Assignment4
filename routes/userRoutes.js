@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
 router.get('/:id', async (req, res) => {
     const userId = req.params.id;
 
@@ -31,7 +32,8 @@ router.post('/add', async (req, res) => {
         password: req.body.password,
         username: req.body.username,
         purchaseHistory: req.body.purchaseHistory,
-        shippingAddress: req.body.shippingAddress
+        shippingAddress: req.body.shippingAddress,
+        cartProducts: req.body.cartProducts,
     });
 
     try {
@@ -70,7 +72,7 @@ router.put('/:id', async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.json({ message: "User updated successfully", updatedUser });
+        res.json({ statusCode: 200, message: "User updated successfully", updatedUser });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

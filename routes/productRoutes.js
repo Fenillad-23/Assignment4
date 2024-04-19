@@ -12,6 +12,21 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    const productId = req.params.id;
+
+    try {
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        res.json(product);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
 router.post('/add', async (req, res) => {
     const product = new Product({
         name: req.body.name,
@@ -35,7 +50,7 @@ router.post('/add', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
-
+    
     try {
         const deletedProduct = await Product.findByIdAndDelete(id);
 
