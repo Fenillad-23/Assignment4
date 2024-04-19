@@ -11,7 +11,16 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
-
+router.get('/api/orders', async (req, res) => {
+    try {
+        
+        const orders = await db.collection('orders').find({}).toArray();
+        res.json(orders);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to fetch orders' });
+    }
+});
 
 router.post('/add', async (req, res) => {
     const order = new Order({
